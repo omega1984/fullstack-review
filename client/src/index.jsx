@@ -15,10 +15,7 @@ class App extends React.Component {
 
   search (term) {
     console.log(`${term} was searched`);
-    var foundRepo = this.state.repos.filter(repo => repo.term === term);
-    this.setState({
-      repos: foundRepo
-    })
+    // change
   }
 
   render () {

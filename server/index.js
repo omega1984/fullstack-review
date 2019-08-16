@@ -13,11 +13,12 @@ app.post('/repos', function (req, res) {
   // save the repo information in the database
   console.log(req.body)
   github.getReposByUsername(req.body.username, (err, data) =>{
+    console.log(data, "ahhahaha")
     if (err) {
       console.log('helper function error')
     }else{
       data.forEach(repo => {
-        return db.save({
+        db.save({
           login: repo.owner.login,
           url: repo.owner.url,
           description: repo.description,

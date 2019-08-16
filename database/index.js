@@ -14,8 +14,9 @@ let repoSchema = mongoose.Schema({
 let Repo = mongoose.model('Repo', repoSchema);
 
 let save = (repo) => {
+  console.log(repo);
   var file = new Repo(repo);
-  
+
   file.save((err, file) =>{
     if (err){
       console.log(err);

@@ -16,7 +16,7 @@ app.post('/repos', function (req, res) {
     if (err) {
       console.log('helper function error')
     }else{
-      data.forEach(repo => {
+      data.forEach((repo, index) => {
         db.save({
           login: repo.owner.login,
           url: repo.html_url,
@@ -25,7 +25,7 @@ app.post('/repos', function (req, res) {
           watchers_count: repo.watchers_count,
           forks_count: repo.forks_count,
           stargazers_count: repo.stargazers_count
-        })
+        }, () => {index === data.length -1 ? res.sendStatus(200): null})
       })
     }
   })
@@ -38,7 +38,6 @@ app.get('/repos', function (req, res) {
     if (err){
       console.log(err);
     }else{
-      console.log("sending data to client")
       res.send(data)
     }
   })

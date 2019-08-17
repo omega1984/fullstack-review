@@ -13,16 +13,22 @@ let repoSchema = mongoose.Schema({
 
 let Repo = mongoose.model('Repo', repoSchema);
 
-let save = (repo) => {
+let save = (repo, callback) => {
   var file = new Repo(repo);
 
-  file.save((err, file) =>{
-    if (err){
-      console.log("saving error", err);
-    }else{
-      console.log(`${file.login} added to the database`)
+  Repo.remove({}, (err)=>{
+    if (err) console.log(err);
+    else{
+      file.save((err, file) =>{
+        if (err){
+          console.log("saving error", err);
+        }else{
+          console.log(`${file.login} added to the database`)
+        }
+      })
+      callback();
     }
-  })
+  })  
 }
 
 let get = (callback) =>{
@@ -32,7 +38,7 @@ let get = (callback) =>{
     if (err){
       console.log("db.get error")
     }else{
-      console.log(sortedRepo);
+      // console.log(sortedRepo);
       callback(err, sortedRepo);
     }
   })

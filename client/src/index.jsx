@@ -10,15 +10,16 @@ class App extends React.Component {
     this.state = { 
       repos: []
     }
+    this.search = this.search.bind(this);
+    this.setState = this.setState.bind(this);
   }
 
   componentDidMount(){
     $.ajax({
       url: '/repos',
       type: 'GET',
-      data: 'json',
       success: (data) => {
-        console.log(data);
+        console.log("refreshed data", data);
         this.setState({
           repos: data
         })
@@ -32,23 +33,18 @@ class App extends React.Component {
       url: "/repos",
       type: "POST",
       data: {username: term},
-      statusCode: {
-        200: (data) => {
-          console.log("get route working", data);
-          $.ajax({
-            url: '/repos',
-            type: 'GET',
-            data: 'json',
-            success: (data) =>{
-              this.setstate({
-                repos: data
-              })
-            }
-          })
-        },
-        400: () => {
-          console.log("send username from client to server failed")
-        }
+      success: (data) =>{
+        console.log("get route working", data);
+        $.ajax({
+          url: '/repos',
+          type: 'GET',
+          success: (data) =>{
+            console.log("data received by client", data);
+            this.setState({
+              repos: data
+            })
+          }
+        })
       }
     })
     // $.post('/repos', {username: term}, (data1)=>{

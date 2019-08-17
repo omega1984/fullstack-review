@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/fetcher');
 
 let repoSchema = mongoose.Schema({
-  login: {type: String, unique: true},
-  url: String,
+  login: String,
+  url: {type: String, unique: true},
   description: String,
   created_at: Date,
   watchers_count: Number,
@@ -23,6 +23,10 @@ let save = (repo) => {
       console.log(`${file.login} added to the database`)
     }
   })
+}
+
+let get = () =>{
+  
 }
 
 module.exports.save = save;

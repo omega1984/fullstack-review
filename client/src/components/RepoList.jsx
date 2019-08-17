@@ -20,7 +20,7 @@ const RepoList = (props) => (
     }
 
     <div>
-    There are total {props.repos.length} repos.
+    There are total {props.repos.length > 25 ? 25 : props.repos.length} repos.
     </div>
   </div>
 )

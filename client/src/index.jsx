@@ -10,8 +10,6 @@ class App extends React.Component {
     this.state = { 
       repos: []
     }
-    this.search = this.search.bind(this);
-    this.setState = this.setState.bind(this);
   }
 
   componentDidMount(){
@@ -34,7 +32,6 @@ class App extends React.Component {
       type: "POST",
       data: {username: term},
       success: (data) =>{
-        console.log("get route working", data);
         $.ajax({
           url: '/repos',
           type: 'GET',
@@ -47,15 +44,6 @@ class App extends React.Component {
         })
       }
     })
-    // $.post('/repos', {username: term}, (data1)=>{
-    //   console.log("post data: ", data1);
-    //   $.get('/repos', (data2)=>{
-    //     console.log("get data from database: ", data2);
-    //     this.setState({
-    //       repos: data2
-    //     })
-    //   })
-    // })
   }
 
   render () {

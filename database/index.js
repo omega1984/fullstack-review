@@ -36,9 +36,8 @@ let get = (callback) =>{
   Repo.find({}, (err, data) =>{
     const sortedRepo = data.sort((a, b) => a.watchers_count - b.watchers_count);
     if (err){
-      console.log("db.get error")
+      console.log(err)
     }else{
-      // console.log(sortedRepo);
       callback(err, sortedRepo);
     }
   })

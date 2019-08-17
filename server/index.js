@@ -38,6 +38,7 @@ app.get('/repos', function (req, res) {
     if (err){
       console.log(err);
     }else{
+      console.log("sending data to client")
       res.send(data)
     }
   })

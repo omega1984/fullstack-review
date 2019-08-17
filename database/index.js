@@ -25,8 +25,18 @@ let save = (repo) => {
   })
 }
 
-let get = () =>{
-  
+let get = (callback) =>{
+  // Repo below is the Repo model
+  Repo.find({}, (err, data) =>{
+    const sortedRepo = data.sort((a, b) => a.watchers_count - b.watchers_count);
+    if (err){
+      console.log("db.get error")
+    }else{
+      console.log(sortedRepo);
+      callback(err, sortedRepo);
+    }
+  })
 }
 
+module.exports.get = get;
 module.exports.save = save;

@@ -34,13 +34,32 @@ class App extends React.Component {
       data: {username: term},
       statusCode: {
         200: (data) => {
-          console.log(data);
+          console.log("get route working", data);
+          $.ajax({
+            url: '/repos',
+            type: 'GET',
+            data: 'json',
+            success: (data) =>{
+              this.setstate({
+                repos: data
+              })
+            }
+          })
         },
         400: () => {
           console.log("send username from client to server failed")
         }
       }
     })
+    // $.post('/repos', {username: term}, (data1)=>{
+    //   console.log("post data: ", data1);
+    //   $.get('/repos', (data2)=>{
+    //     console.log("get data from database: ", data2);
+    //     this.setState({
+    //       repos: data2
+    //     })
+    //   })
+    // })
   }
 
   render () {
